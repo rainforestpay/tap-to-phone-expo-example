@@ -1,0 +1,10 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "podspecPath": "ios/RainforestTapSdk.podspec",
+    "modules": ["RainforestTapSdkModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.rainforestpaysdk.RainforestTapSdkModule"]
+  }
+}

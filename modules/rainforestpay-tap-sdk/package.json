@@ -1,0 +1,15 @@
+{
+  "name": "rainforestpay-tap-sdk",
+  "version": "0.1.0",
+  "private": true,
+  "keywords": [
+    "expo-module"
+  ],
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}

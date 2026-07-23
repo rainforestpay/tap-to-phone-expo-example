@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.plugin.compose'
+
+buildscript {
+  repositories {
+    google()
+    mavenCentral()
+    gradlePluginPortal()
+  }
+  dependencies {
+    classpath("org.jetbrains.kotlin:compose-compiler-gradle-plugin:2.1.20")
+  }
+}
+
+group = 'expo.modules.rainforestpaysdk'
+version = '0.1.0'
+
+def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
+apply from: expoModulesCorePlugin
+applyKotlinExpoModulesCorePlugin()
+useCoreDependencies()
+useExpoPublishing()
+
+buildscript {
+  ext.safeExtGet = { prop, fallback ->
+    rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
+  }
+}
+
+android {
+  namespace "expo.modules.rainforestpaysdk"
+  compileSdkVersion safeExtGet("compileSdkVersion", 36)
+
+  defaultConfig {
+    minSdkVersion safeExtGet("minSdkVersion", 31)
+    targetSdkVersion safeExtGet("targetSdkVersion", 36)
+    versionCode 1
+    versionName "0.1.0"
+  }
+
+  buildFeatures {
+    compose true
+  }
+
+  lintOptions {
+    abortOnError false
+  }
+}
+
+dependencies {
+  api("com.rainforestpay:android-sdk-sandbox-debug:0.2.3")
+  implementation("androidx.compose.ui:ui:1.5.4")
+  implementation("androidx.compose.ui:ui-tooling-preview:1.5.4")
+  implementation("androidx.compose.material3:material3:1.1.2")
+}

@@ -1,0 +1,530 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2.3 effective-5.10 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+// swift-module-flags: -target arm64-apple-ios17.4 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name RainforestSDK
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.3
+import CoreLocation
+import Foundation
+import LocalAuthentication
+import ProximityReader
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+public struct SessionStatement : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CreateSessionRequest : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct ErrorResponse : Swift.Codable {
+  public init()
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Response<TData> : Swift.Codable where TData : Swift.Decodable, TData : Swift.Encodable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CreateSessionData : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public func CreateSession(apiKey: Swift.String, req: RainforestSDK.CreateSessionRequest) async throws -> RainforestSDK.CreateSessionData
+public struct DeviceAuthTokenData : Swift.Codable, Swift.Sendable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DeviceAuthTokenResponse : Swift.Codable, Swift.Sendable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DeviceRegistrationData : Swift.Codable, Swift.Sendable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DeviceRegistrationResponse : Swift.Codable, Swift.Sendable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MerchantResponse : Swift.Codable, Swift.Sendable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MerchantAddress : Swift.Codable, Swift.Sendable {
+  public let addressLine1: Swift.String
+  public let addressLine2: Swift.String?
+  public let city: Swift.String
+  public let state: Swift.String
+  public let postalCode: Swift.String
+  public let country: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct TtpProfile : Swift.Codable, Swift.Sendable {
+  public let countryCode: Swift.String
+  public let countryCode3: Swift.String
+  public let currencyCode: Swift.String
+  public let currencyCodeNumeric: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MerchantInternal : Swift.Codable, Swift.Sendable {
+  public let ttpProfile: RainforestSDK.TtpProfile?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct MerchantData : Swift.Codable, Swift.Sendable {
+  public let merchantId: Swift.String
+  public let name: Swift.String
+  public let dbaName: Swift.String
+  public let mcc: Swift.String
+  public let address: RainforestSDK.MerchantAddress?
+  public let `internal`: RainforestSDK.MerchantInternal?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public func requireTtpProfile(_ merchantData: RainforestSDK.MerchantData) throws -> RainforestSDK.TtpProfile
+public struct CancelPayinRequest : Swift.Codable {
+  public var payinId: Swift.String
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct CreatePayinConfigRequest : Swift.Codable {
+  public var amount: Swift.Int
+  public var merchantId: Swift.String
+  public var currencyCode: Swift.String
+  public var idempotencyKey: Swift.String
+  public var deviceTipConfig: RainforestSDK.DeviceTipConfig?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PayinConfigData : Swift.Codable, Swift.Sendable {
+  public let payinConfigId: Swift.String
+  public let paymentMethodConfigId: Swift.String
+  public let amount: Swift.Int
+  public let level23: RainforestSDK.Level23?
+  public let deviceTipConfig: RainforestSDK.DeviceTipConfig?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(payinConfigId: Swift.String, paymentMethodConfigId: Swift.String, amount: Swift.Int, level23: RainforestSDK.Level23?, deviceTipConfig: RainforestSDK.DeviceTipConfig? = nil)
+  #endif
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct Level23 : Swift.Codable, Swift.Sendable {
+  public let taxAmount: Swift.Int
+  public let shippingAmount: Swift.Int
+  public let orderNumber: Swift.String
+  public let shippingCountry: Swift.String
+  public let shippingPostalCode: Swift.String
+  public let shippingFromPostalCode: Swift.String
+  public let commodityCode: Swift.String
+  public let lineItems: [RainforestSDK.LineItem]
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct LineItem : Swift.Codable, Swift.Sendable {
+  public let discountRate: Swift.Double
+  public let quantity: Swift.Int
+  public let productCode: Swift.String
+  public let taxRate: Swift.Double
+  public let taxAmount: Swift.Int
+  public let totalAmount: Swift.Int
+  public let commodityCode: Swift.String
+  public let unitOfMeasure: Swift.String
+  public let description: Swift.String
+  public let discountAmount: Swift.Int
+  public let unitAmount: Swift.Int
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PayinConfigResponse : Swift.Codable, Swift.Sendable {
+  public let status: Swift.String
+  public let data: RainforestSDK.PayinConfigData?
+  public let errors: [RainforestSDK.ResponseError]?
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct DeviceTipConfig : Swift.Codable, Swift.Sendable {
+  public static let maxPresetOptions: Swift.Int
+  public let tipPercentages: [Swift.Int]?
+  public let tipAmounts: [Swift.Int]?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(tipPercentages: [Swift.Int]?, tipAmounts: [Swift.Int]?) throws
+  #endif
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+extension RainforestSDK.DeviceTipConfig {
+  public static func amount(forPercentagePCM pcm: Swift.Int, baseAmountMinorUnits: Swift.Int) throws -> Swift.Int
+  public func presetAmounts(baseAmountMinorUnits: Swift.Int) throws -> [Swift.Int]
+}
+public struct PayinConfig : Swift.Codable, Swift.Sendable {
+  public let payinConfigId: Swift.String
+  public let processingMode: Swift.String?
+  public let amount: Swift.Int
+  public let currencyCode: Swift.String?
+  public let deviceTipConfig: RainforestSDK.DeviceTipConfig?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(payinConfigId: Swift.String, processingMode: Swift.String?, amount: Swift.Int, currencyCode: Swift.String?, deviceTipConfig: RainforestSDK.DeviceTipConfig? = nil)
+  #endif
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PayinData : Swift.Codable, Swift.Sendable {
+  public let payinId: Swift.String
+  public let status: Swift.String
+  public let amount: Swift.Int
+  public let payinConfig: RainforestSDK.PayinConfig
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PayinResponse : Swift.Codable, Swift.Sendable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public struct PresentPayinRequest : Swift.Encodable {
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+public struct PresentPayinResponse : Swift.Decodable, Swift.Sendable {
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum RainforestResponseStatus : Swift.String, Swift.Decodable, Swift.Sendable {
+  case success
+  case failure
+  case paused
+  public var description: Swift.String {
+    get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct RainforestApiConfig {
+}
+public struct RainforestApiDependencies {
+}
+public protocol RainforestApiProtocol {
+  func cancelPresented(sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws
+  #if compiler(>=5.3) && $NonescapableTypes
+  func createPayinConfig(sessionKey: Swift.String, merchantId: Swift.String, amount: Swift.Int) async throws -> RainforestSDK.PayinConfigData?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  func createPayinConfig(sessionKey: Swift.String, merchantId: Swift.String, amount: Swift.Int, deviceTipConfig: RainforestSDK.DeviceTipConfig?) async throws -> RainforestSDK.PayinConfigData?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  func getPayinConfig(sessionKey: Swift.String, payinConfigID: Swift.String) async throws -> RainforestSDK.PayinConfigData?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  func getPayin(sessionKey: Swift.String, payinId: Swift.String) async throws -> RainforestSDK.PayinData?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  func getDeviceAuthToken(sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws -> RainforestSDK.DeviceAuthTokenData?
+  #endif
+  func getDeviceRegistration(sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws -> RainforestSDK.DeviceRegistrationData
+  func getMerchant(sessionKey: Swift.String, merchantId: Swift.String) async throws -> RainforestSDK.MerchantData
+  func presentPayin(sessionKey: Swift.String, deviceRegistrationId: Swift.String, payinConfigId: Swift.String) async throws -> RainforestSDK.PayinData
+  func pollPayin(sessionKey: Swift.String, payinId: Swift.String, shouldStopPolling: (RainforestSDK.PayinData) -> Swift.Bool) async throws -> RainforestSDK.PayinData
+}
+extension RainforestSDK.RainforestApiProtocol {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func createPayinConfig(sessionKey: Swift.String, merchantId: Swift.String, amount: Swift.Int) async throws -> RainforestSDK.PayinConfigData?
+  #endif
+}
+public struct ResponseError : Swift.Codable, Swift.Sendable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public enum ApiError : Swift.Error, Swift.Codable {
+  case general, missingApiKey, missingSessionKey, invalidParam, invalidRequestBody, invalidRequestUrl, invalidResponseData
+  case error(code: Swift.Int, message: Swift.String?)
+  case invalidResponseBody
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RainforestAPIClient : RainforestSDK.RainforestApiProtocol {
+  public func cancelPresented(sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func createPayinConfig(sessionKey: Swift.String, merchantId: Swift.String, amount: Swift.Int, deviceTipConfig: RainforestSDK.DeviceTipConfig?) async throws -> RainforestSDK.PayinConfigData?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func getPayinConfig(sessionKey: Swift.String, payinConfigID: Swift.String) async throws -> RainforestSDK.PayinConfigData?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func getPayin(sessionKey: Swift.String, payinId: Swift.String) async throws -> RainforestSDK.PayinData?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func getDeviceAuthToken(sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws -> RainforestSDK.DeviceAuthTokenData?
+  #endif
+  public func getDeviceRegistration(sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws -> RainforestSDK.DeviceRegistrationData
+  public func getMerchant(sessionKey: Swift.String, merchantId: Swift.String) async throws -> RainforestSDK.MerchantData
+  public func presentPayin(sessionKey: Swift.String, deviceRegistrationId: Swift.String, payinConfigId: Swift.String) async throws -> RainforestSDK.PayinData
+  public func pollPayin(sessionKey: Swift.String, payinId: Swift.String, shouldStopPolling: (_ payin: RainforestSDK.PayinData) -> Swift.Bool) async throws -> RainforestSDK.PayinData
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class SettingsStorage {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func getStr(forKey key: Swift.String) -> Swift.String?
+  #endif
+  public static func setStr(forkey key: Swift.String, _ val: Swift.String)
+  @objc deinit
+}
+extension UIKit.UIDevice {
+  @_Concurrency.MainActor @preconcurrency public var modelName: Swift.String {
+    get
+  }
+}
+public enum TapProvider {
+  public struct ConfigureInput {
+    public let merchant: RainforestSDK.MerchantData
+    public let terminalProfileId: Swift.String
+    public let deviceAuthToken: Swift.String
+  }
+  public struct PrepareInput {
+    public let merchant: RainforestSDK.MerchantData
+    public let terminalProfileId: Swift.String
+    public let deviceAuthToken: Swift.String
+  }
+  public struct PrepareOutput {
+    public let success: Swift.Bool
+  }
+  public struct PerformTransactionInput {
+    public let payin: RainforestSDK.PayinData
+    public let merchant: RainforestSDK.MerchantData
+    public let amount: Foundation.Decimal
+    public let tipString: Swift.String?
+    public let subTotalString: Swift.String?
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func amountString(minorUnits: Swift.Int?) -> Swift.String?
+  #endif
+  public struct PerformTransactionOutput {
+    public let payin: RainforestSDK.PayinData
+    public init(payin: RainforestSDK.PayinData)
+  }
+  public struct ResumeInput {
+    public let deviceAuthToken: Swift.String
+  }
+  public struct ResumeOutput {
+    public init()
+  }
+  @available(iOS 17.4, *)
+  public protocol ProviderProtocol {
+    func activateReader() async throws
+    func configure(_ input: RainforestSDK.TapProvider.ConfigureInput) async throws
+    func enableTapToPay() async throws
+    func eventStream() async -> _Concurrency.AsyncStream<RainforestSDK.TapEvent>
+    func deviceIdentifier() -> Swift.String
+    func isAccountLinked() async throws -> Swift.Bool
+    func merchantsRedirectUrl() async throws -> Foundation.URL
+    func teardown() async
+    func performTransaction(_ input: RainforestSDK.TapProvider.PerformTransactionInput) async throws -> RainforestSDK.TapProvider.PerformTransactionOutput
+    func abortTransaction() async throws -> Swift.Bool
+    #if compiler(>=5.3) && $NonescapableTypes
+    func posIdentifier() -> Swift.String?
+    #endif
+    func prepare(_ input: RainforestSDK.TapProvider.PrepareInput) async throws
+    func resume(_ input: RainforestSDK.TapProvider.ResumeInput) async throws -> RainforestSDK.TapProvider.ResumeOutput
+    func sdkVersion() -> Swift.String
+    #if compiler(>=5.3) && $NonescapableTypes
+    func sessionExpiryTime() -> Swift.String?
+    #endif
+  }
+}
+@available(iOS 17.4, *)
+public enum TapEvent : Swift.Sendable {
+  case readerEvent(ProximityReader.PaymentCardReader.Event)
+  case customEvent(RainforestSDK.RainforestEvent)
+}
+public struct TapProviderError : Swift.Error {
+  public let errorCode: Swift.String
+  public let errorDescription: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(errorCode: Swift.String, errorDescription: Swift.String?)
+  #endif
+}
+public struct CancelPayinInput {
+  public var sessionKey: Swift.String
+  public var deviceRegistrationId: Swift.String
+  public var payinId: Swift.String
+}
+public struct SetupResult {
+}
+public struct PrepareInput {
+  public var sessionKey: Swift.String
+  public var deviceRegistrationId: Swift.String
+}
+public struct PresentInput {
+  public var sessionKey: Swift.String
+  public var payinConfigId: Swift.String
+  public var deviceRegistrationId: Swift.String
+}
+public struct ClientMetadata {
+  public let merchantTermsAccepted: Swift.Bool
+}
+public struct PresentPayinOptions {
+  public let tip: Swift.Int?
+  public let cancelPayinOnTapUIClose: Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(tip: Swift.Int? = nil, cancelPayinOnTapUIClose: Swift.Bool = true)
+  #endif
+}
+@available(iOS 17.4, *)
+@_Concurrency.MainActor public protocol TapToPhoneProtocol : RainforestSDK.TapToPhoneCoreProtocol {
+  @_Concurrency.MainActor func setup() async throws -> RainforestSDK.SetupResult
+  @_Concurrency.MainActor func prepare() async throws
+  @_Concurrency.MainActor func resume() async throws
+}
+@available(iOS 17.4, *)
+@_Concurrency.MainActor public protocol TapToPhoneCoreProtocol {
+  @_Concurrency.MainActor func clientMetadata() async throws -> RainforestSDK.ClientMetadata
+  @_Concurrency.MainActor func eventStream() -> _Concurrency.AsyncStream<RainforestSDK.TapEvent>
+  @_Concurrency.MainActor func presentPayin(payinConfigId: Swift.String) async throws -> RainforestSDK.PaymentResponse
+  @_Concurrency.MainActor func presentPayin(payinConfigId: Swift.String, options: RainforestSDK.PresentPayinOptions) async throws -> RainforestSDK.PaymentResponse
+  @_Concurrency.MainActor func cancelPresented() async throws
+  @_Concurrency.MainActor func teardown() async
+  @_Concurrency.MainActor func updateSessionKey(_ newKey: Swift.String) async
+}
+@available(iOS 17.4, *)
+extension RainforestSDK.TapToPhoneCoreProtocol {
+  @_Concurrency.MainActor public func presentPayin(payinConfigId: Swift.String) async throws -> RainforestSDK.PaymentResponse
+}
+@_hasMissingDesignatedInitializers @available(iOS 17.4, *)
+@_Concurrency.MainActor public class TapToPhone : RainforestSDK.TapToPhoneProtocol {
+  @_Concurrency.MainActor public func eventStream() -> _Concurrency.AsyncStream<RainforestSDK.TapEvent>
+  @_Concurrency.MainActor public func updateSessionKey(_ newKey: Swift.String) async
+  @_Concurrency.MainActor public func teardown() async
+  @objc deinit
+}
+@available(iOS 17.4, *)
+@_Concurrency.MainActor extension RainforestSDK.TapToPhone {
+  @_Concurrency.MainActor public func prepare() async throws
+  @_Concurrency.MainActor public func resume() async throws
+}
+@available(iOS 17.4, *)
+@_Concurrency.MainActor extension RainforestSDK.TapToPhone {
+  @_Concurrency.MainActor public func presentPayin(payinConfigId: Swift.String, options: RainforestSDK.PresentPayinOptions) async throws -> RainforestSDK.PaymentResponse
+}
+@available(iOS 17.4, *)
+@_Concurrency.MainActor extension RainforestSDK.TapToPhone {
+  @_Concurrency.MainActor public func cancelPresented() async throws
+  @_Concurrency.MainActor public func clientMetadata() async throws -> RainforestSDK.ClientMetadata
+  @_Concurrency.MainActor public func setup() async throws -> RainforestSDK.SetupResult
+}
+public enum RainforestErrorCode : Swift.String, Swift.Error {
+  case api
+  case appConfiguration
+  case authorization
+  case cardReader
+  case cardReaderSession
+  case initialize
+  case invalidPayinConfig
+  case tippingNotAllowed
+  case location
+  case merchant
+  case missingPermission
+  case notReady
+  case notSupported
+  case invalidSessionKey
+  case service
+  case unknown
+  case usage
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum RainforestError : Swift.Error, Foundation.LocalizedError, Swift.Equatable {
+  case deviceInUse
+  case prepareInFlight
+  case resumeInFlight
+  case presentPayinInFlight
+  case error(RainforestSDK.RainforestErrorCode, Swift.String)
+  case notImplemented(Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var errorDescription: Swift.String? {
+    get
+  }
+  #endif
+  public static func == (a: RainforestSDK.RainforestError, b: RainforestSDK.RainforestError) -> Swift.Bool
+}
+public enum RainforestEvent : Swift.Codable, Swift.Sendable {
+  case customEvent(payload: Swift.String)
+  case readerNotReady(Swift.String)
+  case ready
+  case preparing
+  case attempted
+  case cardDetected
+  case cardReadSuccess
+  case cardReadFailure
+  case canceled
+  case paused
+  case configured
+  case approved
+  case authorizing
+  case declined
+  case errorOccurred
+  case invalidSessionKey
+  case prepareSucceeded
+  case prepareFailed(Swift.String)
+  case inProgress
+  case unknownEvent(Swift.String)
+  case updateReaderProgress(Swift.Int)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 17.4, *)
+public enum RainforestPay {
+  public static func API(_ environment: RainforestSDK.Environment) -> any RainforestSDK.RainforestApiProtocol
+  public static func TapToPhone(_ environment: RainforestSDK.Environment, sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws -> any RainforestSDK.TapToPhoneProtocol
+  public static func TapToPhoneAuto(environment: RainforestSDK.Environment, sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws -> any RainforestSDK.TapToPhoneCoreProtocol
+  @available(*, deprecated, message: "Please use TapToPhone(_ environment: Environment, sessionKey: String, deviceRegistrationId: String) and start using the functions without deviceRegistrationId such as setup() and prepare()")
+  public static func TapToPhone(_ environment: RainforestSDK.Environment, sessionKey: Swift.String) async throws -> any RainforestSDK.TapToPhoneProtocol
+  public static func setupTapToPhone(environment: RainforestSDK.Environment, sessionKey: Swift.String, deviceRegistrationId: Swift.String) async throws -> RainforestSDK.SetupResult
+  public static func version() -> Swift.String
+}
+public enum Environment : Swift.String {
+  case dev, local, production, sandbox, stub
+  public static func fromString(_ input: Swift.String) -> RainforestSDK.Environment
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(rawValue: Swift.String)
+  #endif
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct PaymentResponse : Swift.Sendable {
+  public var status: RainforestSDK.RainforestResponseStatus
+  public var payin: RainforestSDK.PayinData
+  public init(_ status: RainforestSDK.RainforestResponseStatus, _ payinData: RainforestSDK.PayinData)
+  public var isSuccess: Swift.Bool {
+    get
+  }
+  public var isFailure: Swift.Bool {
+    get
+  }
+  public var isPaused: Swift.Bool {
+    get
+  }
+}
+extension RainforestSDK.RainforestResponseStatus : Swift.Equatable {}
+extension RainforestSDK.RainforestResponseStatus : Swift.Hashable {}
+extension RainforestSDK.RainforestResponseStatus : Swift.RawRepresentable {}
+@available(iOS 17.4, *)
+extension RainforestSDK.TapToPhone : Swift.Sendable {}
+extension RainforestSDK.RainforestErrorCode : Swift.Equatable {}
+extension RainforestSDK.RainforestErrorCode : Swift.Hashable {}
+extension RainforestSDK.RainforestErrorCode : Swift.RawRepresentable {}
+extension RainforestSDK.Environment : Swift.Equatable {}
+extension RainforestSDK.Environment : Swift.Hashable {}
+extension RainforestSDK.Environment : Swift.RawRepresentable {}
